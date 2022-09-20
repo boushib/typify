@@ -67,7 +67,12 @@ const Game = () => {
             </span>
           </div>
         </div>
-        {isGameOver && <div className="game__end">Game Over!</div>}
+        {isGameOver && (
+          <div className="game__end">
+            Game Over!
+            <span>Score: {score}</span>
+          </div>
+        )}
         {!isGameOver && <div className="game__char">{char}</div>}
       </div>
     </div>
