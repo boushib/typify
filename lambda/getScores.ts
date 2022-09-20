@@ -6,16 +6,14 @@ envConfig()
 
 export const handler: Handler = async (event) => {
   try {
-    const res = await fetch(
-      `https://api.airtable.com/v0/app4hMMyTo2jkG0z9/Scores?maxRecords=10`,
-      {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${process.env.AIRTABLE_API_KEY}`,
-          ContentType: 'application/json',
-        },
-      }
-    )
+    const { AIRTABLE_API_URL, AIRTABLE_API_KEY } = process.env
+    const res = await fetch(`${AIRTABLE_API_URL}/Scores?maxRecords=10`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${AIRTABLE_API_KEY}`,
+        ContentType: 'application/json',
+      },
+    })
 
     const data: any = await res.json()
 
