@@ -1,0 +1,23 @@
+.nav
+  border-bottom: 1px solid #eee
+  &__container
+    display: flex
+    align-items: center
+    justify-content: space-between
+    gap: 32px
+    min-height: 64px
+
+  &__logo
+    font-size: 32px
+    font-weight: 500
+    font-family: "Poppins", sans-serif
+    color: var(--color-primary)
+
+  &__menu
+    display: flex
+    align-items: center
+    gap: 20px
+
+    &__item
+      &.active
+        color: var(--color-primary)
