@@ -1,1 +1,1 @@
-export { default } from './LeaderboardItem'
+export { default } from "./LeaderboardItem"

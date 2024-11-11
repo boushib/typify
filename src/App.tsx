@@ -1,8 +1,8 @@
-import { Route, Routes } from 'react-router-dom'
-import Navbar from './components/Navbar'
-import Game from './pages/Game'
-import Home from './pages/Home'
-import Leaderboard from './pages/Leaderboard'
+import { Route, Routes } from "react-router-dom"
+import Navbar from "./components/Navbar"
+import Game from "./pages/Game"
+import Home from "./pages/Home"
+import Leaderboard from "./pages/Leaderboard"
 
 const App = () => (
   <div className="app">

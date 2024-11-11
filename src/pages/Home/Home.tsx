@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom'
-import './Home.sass'
+import { Link } from "react-router-dom"
+import "./Home.sass"
 
 const Home = () => (
   <div className="home page">

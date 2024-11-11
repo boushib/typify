@@ -1,4 +1,34 @@
 
-@import './styles/reset'
-@import './styles/vars'
-@import './styles/base'
+*
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+  font-family: 'Space Mono', monospace
+  color: #888
+
+a
+  text-decoration: none
+
+\:root
+  --color-primary: #a29bfe
+  --color-secondary: #74b9ff
+  --color-tertiary: #e17055
+  --color-gold: #fdcb6e
+  --color-silver: #b2bec3
+  --color-bronze: #cd7f32
+
+h1, h2, h3
+  font-weight: 500
+
+.container
+  padding: 0 24px
+  max-width: 1024px
+  margin: 0 auto
+
+.page
+  padding: 60px 0
+
+  .container
+    display: flex
+    flex-direction: column
+    gap: 24px

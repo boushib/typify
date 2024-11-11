@@ -1,4 +1,4 @@
-import './LeaderboardItem.sass'
+import "./LeaderboardItem.sass"
 
 interface Props {
   rank: number

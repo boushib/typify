@@ -1,5 +1,5 @@
-import { Link, NavLink } from 'react-router-dom'
-import './Navbar.sass'
+import { Link, NavLink } from "react-router-dom"
+import "./Navbar.sass"
 
 const Navbar = () => (
   <nav className="nav">

@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
-import { GAME_DURATION } from '../../constants'
-import { formatToNDigits, getRandomChar } from '../../utils'
-import './Game.sass'
+import { useCallback, useEffect, useRef, useState } from "react"
+import { GAME_DURATION } from "../../constants"
+import { formatToNDigits, getRandomChar } from "../../utils"
+import "./Game.sass"
 
 const Game = () => {
   const [score, setScore] = useState(0)
@@ -33,10 +33,10 @@ const Game = () => {
   }, [])
 
   useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown)
+    window.addEventListener("keydown", handleKeyDown)
 
     return () => {
-      window.removeEventListener('keydown', handleKeyDown)
+      window.removeEventListener("keydown", handleKeyDown)
     }
   }, [handleKeyDown])
 

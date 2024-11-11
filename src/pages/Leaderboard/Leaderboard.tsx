@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react'
-import LeaderboardItem from '../../components/Navbar/LeaderboardItem'
-import { ScoreRecord } from '../../models'
-import './Leaderboard.sass'
+import { useEffect, useState } from "react"
+import LeaderboardItem from "../../components/Navbar/LeaderboardItem"
+import { ScoreRecord } from "../../models"
+import "./Leaderboard.sass"
 
 const Leaderboard = () => {
   const [scoreRecords, setScoreRecords] = useState<Array<ScoreRecord>>([])
@@ -26,12 +26,7 @@ const Leaderboard = () => {
         <h1>Leaderboard</h1>
         <div className="score-records">
           {scoreRecords.map(({ id, username, score }, idx) => (
-            <LeaderboardItem
-              rank={idx + 1}
-              username={username}
-              score={score}
-              key={id}
-            />
+            <LeaderboardItem rank={idx + 1} username={username} score={score} key={id} />
           ))}
         </div>
       </div>
