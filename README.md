@@ -1,4 +1,35 @@
-# Typify
+<div align="center">
+
+# ⌨️ Typify
+
+**A fast, minimal typing speed test, with a leaderboard, stats, themes and an arcade mode.**
+
+[![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white)](https://nextjs.org)
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Sass](https://img.shields.io/badge/Sass-CSS%20modules-CC6699?logo=sass&logoColor=white)](https://sass-lang.com)
+[![Zustand](https://img.shields.io/badge/state-zustand-443E38)](https://zustand.docs.pmnd.rs)
+[![pnpm](https://img.shields.io/badge/pnpm-F69220?logo=pnpm&logoColor=white)](https://pnpm.io)
+<br />
+[![Last commit](https://img.shields.io/github/last-commit/boushib/typify)](https://github.com/boushib/typify/commits/main)
+[![Top language](https://img.shields.io/github/languages/top/boushib/typify)](https://github.com/boushib/typify)
+[![Repo size](https://img.shields.io/github/repo-size/boushib/typify)](https://github.com/boushib/typify)
+
+<img src="docs/screenshots/test.png" alt="Typing test in progress" width="900" />
+
+</div>
+
+## Screenshots
+
+| Results | Leaderboard |
+| --- | --- |
+| <img src="docs/screenshots/results.png" alt="Results with a WPM chart" /> | <img src="docs/screenshots/leaderboard.png" alt="Leaderboard podium with trophies" /> |
+| **Stats** | **Letter Rush** |
+| <img src="docs/screenshots/stats.png" alt="Stats with a progress chart" /> | <img src="docs/screenshots/arcade.png" alt="Letter Rush arcade mode" /> |
+| **Settings** | **On a phone** |
+| <img src="docs/screenshots/settings.png" alt="Settings with theme previews" /> | <p align="center"><img src="docs/screenshots/mobile.png" alt="Leaderboard on a phone" width="260" /></p> |
+
+## About
 
 Typify measures your typing speed and accuracy. It's built with **Next.js 16** (App Router), **React 19** and **TypeScript**.
 

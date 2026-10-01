@@ -153,7 +153,7 @@ const Leaderboard = () => {
               <span className={styles.rank}>{s.rank}</span>
               <span className={styles.name}>
                 <PlayerAvatar name={s.username} size={30} />
-                {s.username}
+                <span className={styles.nameText}>{s.username}</span>
                 {s.username.toLowerCase() === username && <span className={styles.youTag}>you</span>}
               </span>
               <span className={styles.wpm}>{s.wpm.toFixed(2)}</span>
