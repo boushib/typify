@@ -10,6 +10,7 @@
 [![Sass](https://img.shields.io/badge/Sass-CSS%20modules-CC6699?logo=sass&logoColor=white)](https://sass-lang.com)
 [![Zustand](https://img.shields.io/badge/state-zustand-443E38)](https://zustand.docs.pmnd.rs)
 [![pnpm](https://img.shields.io/badge/pnpm-F69220?logo=pnpm&logoColor=white)](https://pnpm.io)
+[![License: MIT](https://img.shields.io/badge/license-MIT-22C55E)](LICENSE)
 <br />
 [![Last commit](https://img.shields.io/github/last-commit/boushib/typify)](https://github.com/boushib/typify/commits/main)
 [![Top language](https://img.shields.io/github/languages/top/boushib/typify)](https://github.com/boushib/typify)
@@ -124,3 +125,7 @@ src/
 ```
 
 **How WPM is calculated:** every five correctly typed characters count as one word. A word counts only if it's typed correctly, and then its trailing space counts too. **Raw WPM** counts every keystroke. **Consistency** measures how steady your per-second speed is.
+
+## License
+
+[MIT](LICENSE) © El Hassane Boushib
