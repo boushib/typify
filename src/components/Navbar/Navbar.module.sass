@@ -66,8 +66,13 @@
   color: var(--main)
   background-color: var(--sub-alt)
 
+// Icons only once the five labels stop fitting (each link keeps its title)
+@media (max-width: 900px)
+  .label
+    display: none
+
 @media (max-width: 640px)
-  .label, .logoSmall
+  .logoSmall
     display: none
 
   .logoText

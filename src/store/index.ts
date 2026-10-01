@@ -22,10 +22,13 @@ interface State {
   settings: Settings
   /** Newest first */
   history: Result[]
+  /** Best Letter Rush score */
+  arcadeBest: number
   setConfig: (patch: Partial<TestConfig>) => void
   setSettings: (patch: Partial<Settings>) => void
   addResult: (result: Result) => void
   clearHistory: () => void
+  setArcadeBest: (score: number) => void
 }
 
 const MAX_HISTORY = 500
@@ -46,15 +49,17 @@ export const useStore = create<State>()(
       config: { mode: "time", time: 30, words: 25, punctuation: false, numbers: false },
       settings: DEFAULT_SETTINGS,
       history: [],
+      arcadeBest: 0,
       setConfig: patch => set(s => ({ config: { ...s.config, ...patch } })),
       setSettings: patch => set(s => ({ settings: { ...s.settings, ...patch } })),
       addResult: result => set(s => ({ history: [result, ...s.history].slice(0, MAX_HISTORY) })),
       clearHistory: () => set({ history: [] }),
+      setArcadeBest: score => set(s => ({ arcadeBest: Math.max(s.arcadeBest, score) })),
     }),
     {
       name: "typify:v1",
       storage: createJSONStorage(() => localStorage),
-      partialize: ({ config, settings, history }) => ({ config, settings, history }),
+      partialize: ({ config, settings, history, arcadeBest }) => ({ config, settings, history, arcadeBest }),
       // Settings added in later versions get their defaults
       merge: (persisted, current) => {
         const p = (persisted ?? {}) as Partial<State>

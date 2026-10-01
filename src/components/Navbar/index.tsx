@@ -1,13 +1,14 @@
 "use client"
 
 import classNames from "classnames"
-import { ChartNoAxesColumn, Crown, Keyboard, Settings } from "lucide-react"
+import { ChartNoAxesColumn, Crown, Gamepad2, Keyboard, Settings } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import styles from "./Navbar.module.sass"
 
 export const NAV = [
   { href: "/", label: "test", icon: Keyboard },
+  { href: "/arcade", label: "arcade", icon: Gamepad2 },
   { href: "/leaderboard", label: "leaderboard", icon: Crown },
   { href: "/stats", label: "stats", icon: ChartNoAxesColumn },
   { href: "/settings", label: "settings", icon: Settings },
