@@ -490,3 +490,84 @@
 
   .live
     font-size: 20px
+
+// Leaderboard submit
+
+.submit
+  width: 100%
+  max-width: 480px
+  display: flex
+  flex-direction: column
+  gap: 8px
+  padding: 14px 16px
+  border-radius: var(--radius)
+  background-color: var(--sub-alt)
+  animation: fadeUp .4s var(--ease-out) .5s backwards
+
+.submitLabel
+  display: flex
+  align-items: center
+  gap: 8px
+  color: var(--sub)
+  font-size: 13px
+
+  svg
+    color: var(--gold)
+
+.submitRow
+  display: flex
+  gap: 8px
+
+  input
+    flex: 1
+    min-width: 0
+    padding: 8px 12px
+    border: 2px solid transparent
+    border-radius: var(--radius-sm)
+    outline: 0
+    background-color: var(--bg)
+
+    &:focus
+      border-color: var(--main)
+
+.submitButton
+  display: inline-flex
+  align-items: center
+  gap: 6px
+  padding: 8px 14px
+  border-radius: var(--radius-sm)
+  color: var(--bg)
+  background-color: var(--main)
+  transition: opacity .15s, transform .1s
+
+  &:disabled
+    opacity: .5
+
+  &:active:not(:disabled)
+    transform: scale(.97)
+
+.submitError
+  color: var(--error)
+  font-size: 12px
+
+.submitDone
+  display: flex
+  flex-wrap: wrap
+  align-items: center
+  justify-content: center
+  gap: 8px
+  padding: 12px 18px
+  border-radius: var(--radius)
+  background-color: var(--sub-alt)
+  animation: pop .4s var(--ease-spring)
+
+  svg
+    color: var(--gold)
+
+  strong
+    color: var(--main)
+
+.submitLink
+  color: var(--main)
+  text-decoration: underline
+  text-underline-offset: 3px

@@ -1,0 +1,370 @@
+.page
+  display: flex
+  flex-direction: column
+  gap: 32px
+
+.header
+  display: flex
+  flex-wrap: wrap
+  align-items: flex-end
+  justify-content: space-between
+  gap: 16px
+
+  h1
+    font-size: 32px
+
+  p
+    margin-top: 4px
+    color: var(--sub)
+    font-size: 14px
+
+.tabs
+  display: flex
+  flex-wrap: wrap
+  gap: 4px
+  padding: 4px
+  border-radius: var(--radius)
+  background-color: var(--sub-alt)
+
+.tab
+  padding: 6px 12px
+  border-radius: var(--radius-sm)
+  color: var(--sub)
+  font-size: 13px
+  transition: color .15s, background-color .2s
+
+  &:hover
+    color: var(--text)
+
+.tabActive, .tabActive:hover
+  color: var(--bg)
+  background-color: var(--main)
+
+.avatar
+  display: grid
+  place-items: center
+  flex-shrink: 0
+  border-radius: 50%
+  color: #fff
+  font-weight: 700
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .3)
+
+.youTag
+  margin-left: 6px
+  padding: 1px 6px
+  border-radius: 4px
+  color: var(--bg)
+  font-size: 10px
+  font-weight: 700
+  vertical-align: middle
+  background-color: var(--main)
+
+// Podium
+
+.podium
+  display: flex
+  align-items: flex-end
+  justify-content: center
+  gap: 16px
+  padding-top: 24px
+
+.spot
+  flex: 0 1 230px
+  min-width: 0
+  display: flex
+  flex-direction: column
+  align-items: center
+  // --medal is the spot's color
+  --medal: var(--gold)
+
+.spot2
+  --medal: var(--silver)
+
+.spot3
+  --medal: var(--bronze)
+
+.spotTop
+  position: relative
+  display: flex
+  flex-direction: column
+  align-items: center
+  gap: 6px
+  padding-bottom: 16px
+  text-align: center
+  animation: dropIn .7s var(--ease-spring) backwards
+
+.spot3 .spotTop
+  animation-delay: .35s
+
+.spot2 .spotTop
+  animation-delay: .5s
+
+.spot1 .spotTop
+  animation-delay: .7s
+
+@keyframes dropIn
+  from
+    opacity: 0
+    transform: translateY(-40px) scale(.8)
+
+.crown
+  color: var(--gold)
+  filter: drop-shadow(0 2px 8px rgba(246, 196, 83, .6))
+  animation: bob 2.6s ease-in-out infinite
+
+.trophyWrap
+  position: relative
+
+.trophy
+  display: block
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, .35))
+
+.spot1 .trophy
+  filter: drop-shadow(0 0 24px rgba(246, 196, 83, .45)) drop-shadow(0 8px 16px rgba(0, 0, 0, .35))
+  animation: float 3s ease-in-out infinite
+
+@keyframes float
+  50%
+    transform: translateY(-6px)
+
+@keyframes bob
+  50%
+    transform: translateY(-3px) rotate(-4deg)
+
+.sparkle
+  position: absolute
+  color: var(--gold)
+  animation: twinkle 1.8s ease-in-out infinite
+
+.sparkleA
+  top: 4px
+  left: -10px
+
+.sparkleB
+  top: 22px
+  right: -8px
+  animation-delay: .6s
+
+.sparkleC
+  bottom: 18px
+  left: -4px
+  animation-delay: 1.2s
+
+@keyframes twinkle
+  0%, 100%
+    opacity: 0
+    transform: scale(.4) rotate(0)
+  50%
+    opacity: 1
+    transform: scale(1) rotate(45deg)
+
+.spotName
+  max-width: 100%
+  overflow: hidden
+  font-size: 16px
+  font-weight: 700
+  text-overflow: ellipsis
+  white-space: nowrap
+
+.spotWpm
+  color: var(--medal)
+  font-size: 30px
+  font-weight: 700
+  line-height: 1
+
+  small
+    margin-left: 4px
+    color: var(--sub)
+    font-size: 13px
+    font-weight: 400
+
+.spot1 .spotWpm
+  font-size: 38px
+
+.spotAcc
+  color: var(--sub)
+  font-size: 12px
+
+.pedestal
+  position: relative
+  width: 100%
+  display: flex
+  justify-content: center
+  padding-top: 14px
+  border-radius: 14px 14px 4px 4px
+  background: linear-gradient(180deg, color-mix(in srgb, var(--medal) 32%, var(--sub-alt)), var(--sub-alt) 75%)
+  box-shadow: inset 0 2px 0 color-mix(in srgb, var(--medal) 60%, transparent)
+  overflow: hidden
+  transform-origin: bottom
+  animation: rise .8s var(--ease-out) backwards
+
+  span
+    color: var(--medal)
+    font-size: 44px
+    font-weight: 700
+    opacity: .9
+
+  // A light sweep across the pedestal now and then
+  &::after
+    content: ""
+    position: absolute
+    inset: 0
+    background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, .14) 50%, transparent 60%)
+    transform: translateX(-100%)
+    animation: sweep 4s ease-in-out 1.6s infinite
+
+.spot1 .pedestal
+  height: 170px
+  animation-delay: .3s
+
+.spot2 .pedestal
+  height: 125px
+  animation-delay: .15s
+
+.spot3 .pedestal
+  height: 95px
+
+@keyframes rise
+  from
+    transform: scaleY(0)
+
+@keyframes sweep
+  0%
+    transform: translateX(-100%)
+  40%, 100%
+    transform: translateX(100%)
+
+// Ranked list
+
+.list
+  display: flex
+  flex-direction: column
+  gap: 6px
+
+.listHead, .row
+  display: grid
+  grid-template-columns: 48px minmax(0, 1fr) 90px 100px 120px
+  align-items: center
+  gap: 12px
+  padding: 10px 16px
+
+.listHead
+  color: var(--sub)
+  font-size: 12px
+
+.row
+  border-radius: var(--radius)
+  font-size: 14px
+  background-color: var(--sub-alt)
+  transition: transform .15s var(--ease-out), background-color .15s
+  animation: rowIn .4s var(--ease-out) backwards
+
+  &:hover
+    transform: translateX(4px)
+
+@keyframes rowIn
+  from
+    opacity: 0
+    transform: translateY(8px)
+
+.rowYou
+  box-shadow: inset 0 0 0 2px var(--main)
+
+.rank
+  color: var(--sub)
+  font-weight: 700
+
+.name
+  display: flex
+  align-items: center
+  gap: 10px
+  min-width: 0
+  overflow: hidden
+  white-space: nowrap
+
+.wpm
+  color: var(--main)
+  font-weight: 700
+
+.date
+  color: var(--sub)
+  font-size: 12px
+
+// Loading, empty and error states
+
+.skeleton
+  display: flex
+  align-items: flex-end
+  justify-content: center
+  gap: 16px
+  height: 320px
+
+  div
+    flex: 0 1 230px
+    border-radius: 14px 14px 4px 4px
+    background: linear-gradient(90deg, var(--sub-alt), color-mix(in srgb, var(--sub-alt) 70%, var(--sub)), var(--sub-alt))
+    background-size: 200% 100%
+    animation: shimmer 1.2s linear infinite
+
+.skeleton1
+  height: 100%
+
+.skeleton2
+  height: 75%
+
+.skeleton3
+  height: 60%
+
+@keyframes shimmer
+  to
+    background-position: -200% 0
+
+.state
+  display: flex
+  flex-direction: column
+  align-items: center
+  gap: 12px
+  padding: 48px 0
+  color: var(--sub)
+
+.retry
+  display: inline-flex
+  align-items: center
+  gap: 6px
+  padding: 8px 14px
+  border-radius: var(--radius-sm)
+  color: var(--text)
+  background-color: var(--sub-alt)
+
+  &:hover
+    color: var(--bg)
+    background-color: var(--main)
+
+@media (max-width: 720px)
+  .podium
+    gap: 8px
+
+  .spot1 .pedestal
+    height: 120px
+
+  .spot2 .pedestal
+    height: 90px
+
+  .spot3 .pedestal
+    height: 70px
+
+  .pedestal span
+    font-size: 30px
+
+  .spotWpm, .spot1 .spotWpm
+    font-size: 22px
+
+  .spotName
+    font-size: 13px
+
+  .listHead, .row
+    grid-template-columns: 32px minmax(0, 1fr) 64px 70px
+    padding: 10px 12px
+
+  .date, .listHead span:last-child
+    display: none

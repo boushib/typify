@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import type { Result } from "@/lib/engine"
 import { personalBest, useStore } from "@/store"
 import ResultChart from "./ResultChart"
+import SubmitScore from "./SubmitScore"
 import styles from "./TypingTest.module.sass"
 
 /** Counts up to the value with an ease-out, for the headline numbers */
@@ -102,6 +103,8 @@ const Results = ({ result, onNext, onRepeat }: Props) => {
           “{result.quote.text}” <cite>— {result.quote.source}</cite>
         </blockquote>
       )}
+
+      <SubmitScore result={result} />
 
       <div className={styles.resultActions}>
         <button type="button" className={styles.action} onClick={onNext} autoFocus>

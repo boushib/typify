@@ -1,43 +1,69 @@
 import "server-only"
-import type { ScoreRecord } from "@/models"
+import { LEADERBOARD_MODES, type LeaderboardMode, type RankedScore, type ScoreRecord } from "@/models"
 
 /*
  * Mock score store for the leaderboard API. It lives in memory, seeded with
- * demo players, so scores reset when the server restarts. Swap this module
- * for a database when the app gets a real backend.
+ * demo players, so submitted scores reset when the server restarts. Swap this
+ * module for a database when the app gets a real backend.
  */
 
-const SEED: [string, number][] = [
-  ["keymaster", 92],
-  ["swiftfingers", 88],
-  ["qwertyqueen", 85],
-  ["homerow_hero", 81],
-  ["clackattack", 77],
-  ["typhoon", 74],
-  ["nimblenina", 70],
-  ["capslock", 66],
-  ["spacebarista", 61],
-  ["slowpoke", 48],
+const PLAYERS = [
+  "keymaster", "swiftfingers", "qwertyqueen", "homerow_hero", "clackattack", "typhoon", "nimblenina",
+  "capslock", "spacebarista", "tabby", "ctrl_alt_elite", "lettersmith", "rapid.ruth", "wordsworth", "slowpoke",
 ]
 
 const DAY = 24 * 60 * 60 * 1000
 
-// Kept on globalThis so dev hot reloads don't wipe submitted scores
-const store = globalThis as typeof globalThis & { __typifyScores?: ScoreRecord[] }
-store.__typifyScores ??= SEED.map(([username, score], i) => ({
-  id: `seed-${i + 1}`,
-  username,
-  score,
-  createdAt: new Date(Date.now() - (i + 1) * DAY).toISOString(),
-}))
+// Deterministic pseudo-random numbers, so the demo board is the same on every start
+const seeded = (seed: number) => () => {
+  seed = (seed * 16807) % 2147483647
+  return seed / 2147483647
+}
 
-const scores = () => store.__typifyScores!
+const seed = (): ScoreRecord[] => {
+  const rand = seeded(42)
+  return LEADERBOARD_MODES.flatMap((mode, m) =>
+    PLAYERS.map((username, i) => {
+      // Shorter tests run a little faster; better players sit higher
+      const base = 148 - i * 7.5 - m * 3
+      return {
+        id: `seed-${m}-${i}`,
+        username,
+        wpm: Math.round((base + rand() * 6) * 100) / 100,
+        accuracy: Math.round((99.4 - i * 0.35 - rand() * 1.2) * 100) / 100,
+        mode,
+        createdAt: new Date(Date.now() - Math.floor(rand() * 30) * DAY - rand() * DAY).toISOString(),
+      }
+    })
+  )
+}
 
-export const topScores = (limit = 50) =>
-  [...scores()].sort((a, b) => b.score - a.score || a.createdAt.localeCompare(b.createdAt)).slice(0, limit)
+// Kept on globalThis so dev hot reloads don't wipe submitted scores (versioned, so a
+// new data shape reseeds instead of reading the old one)
+const store = globalThis as typeof globalThis & { __typifyScoresV2?: ScoreRecord[] }
+store.__typifyScoresV2 ??= seed()
 
-export const addScore = (username: string, score: number): ScoreRecord => {
-  const record: ScoreRecord = { id: crypto.randomUUID(), username, score, createdAt: new Date().toISOString() }
-  scores().push(record)
-  return record
+const byRank = (a: ScoreRecord, b: ScoreRecord) =>
+  b.wpm - a.wpm || b.accuracy - a.accuracy || a.createdAt.localeCompare(b.createdAt)
+
+/** Each player's best score for a mode, ranked */
+const board = (mode: LeaderboardMode): RankedScore[] => {
+  const best = new Map<string, ScoreRecord>()
+  for (const s of store.__typifyScoresV2!) {
+    if (s.mode !== mode) continue
+    const key = s.username.toLowerCase()
+    const current = best.get(key)
+    if (!current || byRank(s, current) < 0) best.set(key, s)
+  }
+  return [...best.values()].sort(byRank).map((s, i) => ({ ...s, rank: i + 1 }))
+}
+
+export const topScores = (mode: LeaderboardMode, limit = 50) => board(mode).slice(0, limit)
+
+export const addScore = (input: Omit<ScoreRecord, "id" | "createdAt">) => {
+  const record: ScoreRecord = { ...input, id: crypto.randomUUID(), createdAt: new Date().toISOString() }
+  store.__typifyScoresV2!.push(record)
+  const ranked = board(input.mode)
+  const mine = ranked.find(s => s.username.toLowerCase() === input.username.toLowerCase())!
+  return { score: record, rank: mine.rank, personalBest: mine.id === record.id, total: ranked.length }
 }
