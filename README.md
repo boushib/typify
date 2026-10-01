@@ -22,9 +22,13 @@
 
 ## Screenshots
 
-| Results | Leaderboard |
-| --- | --- |
-| <img src="docs/screenshots/results.png" alt="Results with a WPM chart" /> | <img src="docs/screenshots/leaderboard.png" alt="Leaderboard podium with trophies" /> |
+**Results:** WPM, accuracy and a speed chart with error markers
+
+<img src="docs/screenshots/results.png" alt="Results with a WPM chart" width="100%" />
+
+**Leaderboard:** a trophy podium for the top three
+
+<img src="docs/screenshots/leaderboard.png" alt="Leaderboard podium with trophies" width="100%" />
 
 ## About
 
