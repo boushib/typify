@@ -1,0 +1,88 @@
+// Midnight theme as the default; the saved theme is applied before paint
+\:root
+  --bg: #16171d
+  --sub-alt: #1f2129
+  --sub: #5c6170
+  --text: #e4e6eb
+  --main: #a29bfe
+  --error: #ff6b81
+  --error-extra: #a83a50
+  --gold: #f6c453
+  --silver: #c3ccd6
+  --bronze: #d08a4e
+  --radius: 10px
+  --radius-sm: 6px
+  --ease-out: cubic-bezier(.2, .9, .3, 1)
+  --ease-spring: cubic-bezier(.34, 1.56, .64, 1)
+  color-scheme: dark
+
+*, *::before, *::after
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+
+html, body
+  min-height: 100%
+
+body
+  color: var(--text)
+  font-family: var(--font-mono), "Space Mono", ui-monospace, monospace
+  background-color: var(--bg)
+  transition: background-color .3s, color .3s
+  -webkit-font-smoothing: antialiased
+
+a
+  color: inherit
+  text-decoration: none
+
+button
+  color: inherit
+  font: inherit
+  background: none
+  border: 0
+  cursor: pointer
+
+  &:disabled
+    cursor: not-allowed
+
+input, textarea
+  color: inherit
+  font: inherit
+
+ul, ol
+  list-style: none
+
+:focus-visible
+  outline: 2px solid var(--main)
+  outline-offset: 2px
+
+::selection
+  color: var(--bg)
+  background-color: var(--main)
+
+.container
+  width: 100%
+  max-width: 1080px
+  margin: 0 auto
+  padding: 0 24px
+
+.sr-only
+  position: absolute
+  width: 1px
+  height: 1px
+  overflow: hidden
+  clip: rect(0 0 0 0)
+  white-space: nowrap
+
+@media (prefers-reduced-motion: reduce)
+  *, *::before, *::after
+    animation-duration: .01ms !important
+    animation-iteration-count: 1 !important
+    animation-delay: 0s !important
+    transition-duration: .01ms !important
+
+.app
+  min-height: 100vh
+  min-height: 100dvh
+  display: flex
+  flex-direction: column

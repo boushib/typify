@@ -1,0 +1,492 @@
+.test
+  display: flex
+  flex-direction: column
+  align-items: center
+  gap: 28px
+  animation: fadeUp .35s var(--ease-out)
+
+@keyframes fadeUp
+  from
+    opacity: 0
+    transform: translateY(8px)
+
+// Config bar
+
+.configBar
+  display: flex
+  flex-wrap: wrap
+  align-items: center
+  justify-content: center
+  gap: 6px
+  padding: 6px 10px
+  border-radius: var(--radius)
+  background-color: var(--sub-alt)
+  transition: opacity .25s, transform .25s var(--ease-out)
+
+.configHidden
+  opacity: 0
+  transform: translateY(-6px)
+  pointer-events: none
+
+.group
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
+
+.divider
+  width: 3px
+  height: 20px
+  margin: 0 4px
+  border-radius: 2px
+  background-color: var(--bg)
+
+.option
+  display: inline-flex
+  align-items: center
+  gap: 6px
+  padding: 4px 10px
+  border-radius: var(--radius-sm)
+  color: var(--sub)
+  font-size: 13px
+  transition: color .15s
+
+  &:hover
+    color: var(--text)
+
+.optionActive, .optionActive:hover
+  color: var(--main)
+
+// Stage
+
+.stage
+  position: relative
+  width: 100%
+  display: flex
+  flex-direction: column
+  align-items: center
+  gap: 18px
+
+.stageTop
+  width: 100%
+  display: flex
+  align-items: baseline
+  justify-content: space-between
+  min-height: 32px
+
+.live
+  display: flex
+  align-items: baseline
+  gap: 18px
+  color: var(--main)
+  font-size: 24px
+  transition: opacity .2s
+
+.liveIdle
+  opacity: 0
+
+.liveWpm
+  color: var(--sub)
+  font-size: 16px
+
+.capsLock
+  padding: 4px 10px
+  border-radius: var(--radius-sm)
+  color: var(--bg)
+  font-size: 13px
+  background-color: var(--main)
+  animation: pop .3s var(--ease-spring)
+
+@keyframes pop
+  from
+    transform: scale(.8)
+    opacity: 0
+
+.wordsWrap
+  position: relative
+  width: 100%
+  cursor: text
+
+.hiddenInput
+  position: absolute
+  inset: 0
+  width: 100%
+  height: 100%
+  opacity: 0
+  font-size: 16px
+  pointer-events: none
+
+.wordsBox
+  transition: filter .2s, opacity .2s
+
+.blurred
+  filter: blur(5px)
+  opacity: .5
+
+.focusHint
+  position: absolute
+  inset: 0
+  display: flex
+  align-items: center
+  justify-content: center
+  gap: 8px
+  color: var(--text)
+  font-size: 15px
+  animation: fadeIn .2s ease-out
+
+@keyframes fadeIn
+  from
+    opacity: 0
+
+// Words
+
+.words
+  position: relative
+  // Three lines are visible
+  height: calc(1.6em * 3)
+  overflow: hidden
+  line-height: 1.6
+  user-select: none
+
+.wordsInner
+  display: flex
+  flex-wrap: wrap
+  align-content: flex-start
+  transition: transform .18s var(--ease-out)
+
+.word
+  margin-right: .55em
+  border-bottom: 2px solid transparent
+  white-space: nowrap
+
+.wordError
+  border-bottom-color: var(--error)
+
+.letter
+  color: var(--sub)
+  transition: color .06s
+
+.correct
+  color: var(--text)
+
+.incorrect
+  color: var(--error)
+
+.extra
+  color: var(--error-extra)
+
+// Caret
+
+.caret
+  position: absolute
+  top: 0
+  left: 0
+  pointer-events: none
+  will-change: transform
+
+.caretSmooth
+  transition: transform .1s ease-out, width .1s ease-out
+
+.caret_line
+  width: 2px
+  margin-left: -1px
+  border-radius: 1px
+  background-color: var(--main)
+  transform-origin: center
+
+  &::before
+    content: ""
+
+.caret_block
+  border-radius: 3px
+  background-color: var(--main)
+  opacity: .35
+
+.caret_underline
+  border-bottom: 3px solid var(--main)
+
+.caretBlink
+  animation: blink 1s step-end infinite
+
+@keyframes blink
+  50%
+    opacity: 0
+
+.quoteSource
+  align-self: flex-end
+  color: var(--sub)
+  font-size: 13px
+
+.restart
+  display: grid
+  place-items: center
+  width: 44px
+  height: 44px
+  border-radius: var(--radius)
+  color: var(--sub)
+  transition: color .15s, background-color .15s, transform .3s var(--ease-spring)
+
+  &:hover
+    color: var(--text)
+    background-color: var(--sub-alt)
+    transform: rotate(-90deg)
+
+.hints
+  color: var(--sub)
+  font-size: 12px
+
+  kbd
+    padding: 1px 6px
+    border-radius: 4px
+    color: var(--bg)
+    font-family: inherit
+    font-size: 11px
+    background-color: var(--sub)
+
+// Results
+
+.results
+  display: flex
+  flex-direction: column
+  align-items: center
+  gap: 28px
+  animation: fadeUp .4s var(--ease-out)
+
+.resultsTop
+  width: 100%
+  display: grid
+  grid-template-columns: auto minmax(0, 1fr)
+  align-items: center
+  gap: 28px
+
+.headline
+  display: flex
+  flex-direction: column
+  gap: 8px
+
+.big
+  display: flex
+  flex-direction: column
+  line-height: 1
+
+.bigLabel
+  color: var(--sub)
+  font-size: 28px
+
+.bigValue
+  color: var(--main)
+  font-size: 64px
+  font-variant-numeric: tabular-nums
+
+.pb, .pbMuted
+  display: inline-flex
+  align-items: center
+  gap: 6px
+  margin-top: 6px
+  font-size: 13px
+
+.pb
+  padding: 6px 10px
+  border-radius: var(--radius-sm)
+  color: var(--bg)
+  background-color: var(--gold)
+  animation: pbIn .5s var(--ease-spring) .5s backwards, shine 2.4s ease-in-out 1s infinite
+
+@keyframes pbIn
+  from
+    opacity: 0
+    transform: scale(.6) rotate(-6deg)
+
+@keyframes shine
+  50%
+    box-shadow: 0 0 18px var(--gold)
+
+.pbMuted
+  color: var(--sub)
+
+.statGrid
+  width: 100%
+  display: grid
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr))
+  gap: 16px
+
+  div
+    animation: fadeUp .4s var(--ease-out) backwards
+
+    @for $i from 1 through 5
+      &:nth-child(#{$i})
+        animation-delay: #{200 + $i * 60}ms
+
+  dt
+    color: var(--sub)
+    font-size: 14px
+
+  dd
+    color: var(--main)
+    font-size: 28px
+
+.statSmall
+  font-size: 16px !important
+  line-height: 1.4
+
+.charCorrect
+  color: var(--main)
+
+.charIncorrect
+  color: var(--error)
+
+.charExtra
+  color: var(--error-extra)
+
+.resultQuote
+  max-width: 720px
+  color: var(--sub)
+  font-size: 14px
+  text-align: center
+
+  cite
+    font-style: normal
+
+.resultActions
+  display: flex
+  gap: 10px
+
+.action
+  display: inline-flex
+  align-items: center
+  gap: 6px
+  padding: 10px 18px
+  border-radius: var(--radius)
+  color: var(--text)
+  background-color: var(--sub-alt)
+  transition: background-color .15s, color .15s, transform .1s
+
+  &:hover
+    color: var(--bg)
+    background-color: var(--main)
+
+  &:active
+    transform: scale(.97)
+
+// Chart
+
+.chart
+  position: relative
+  width: 100%
+
+  svg
+    display: block
+    width: 100%
+    height: auto
+    overflow: visible
+
+.chartEmpty
+  color: var(--sub)
+  font-size: 14px
+  text-align: center
+
+.gridLine
+  stroke: var(--sub-alt)
+
+.axis
+  fill: var(--sub)
+  font-size: 11px
+
+.wpmLine, .rawLine
+  fill: none
+  stroke-linejoin: round
+  stroke-linecap: round
+  stroke-dasharray: 1
+  animation: draw 1s var(--ease-out) .15s backwards
+
+.wpmLine
+  stroke: var(--main)
+  stroke-width: 2.5
+
+.rawLine
+  stroke: var(--sub)
+  stroke-width: 1.5
+  animation-delay: .05s
+
+@keyframes draw
+  from
+    stroke-dashoffset: 1
+
+.chartArea
+  animation: fadeIn .8s ease-out .6s backwards
+
+.errorMark
+  stroke: var(--error)
+  stroke-width: 2
+  stroke-linecap: round
+  animation: fadeIn .3s ease-out 1s backwards
+
+.hoverLine
+  stroke: var(--sub)
+  stroke-dasharray: 3 3
+
+.tooltip
+  position: absolute
+  top: 0
+  display: flex
+  flex-direction: column
+  padding: 8px 10px
+  border-radius: var(--radius-sm)
+  font-size: 12px
+  white-space: nowrap
+  background-color: var(--sub-alt)
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .3)
+  transform: translateX(-50%)
+  pointer-events: none
+
+  span
+    color: var(--sub)
+
+.tooltipError
+  color: var(--error) !important
+
+.legend
+  display: flex
+  justify-content: flex-end
+  gap: 14px
+  margin-top: 4px
+  color: var(--sub)
+  font-size: 12px
+
+  span
+    display: flex
+    align-items: center
+    gap: 6px
+
+    &::before
+      content: ""
+      width: 12px
+      height: 3px
+      border-radius: 2px
+
+.legendWpm::before
+  background-color: var(--main)
+
+.legendRaw::before
+  background-color: var(--sub)
+
+.legendErrors::before
+  background-color: var(--error)
+
+@media (max-width: 760px)
+  .resultsTop
+    grid-template-columns: 1fr
+
+  .headline
+    flex-direction: row
+    flex-wrap: wrap
+    align-items: flex-end
+    gap: 28px
+
+  .bigValue
+    font-size: 48px
+
+  .bigLabel
+    font-size: 20px
+
+  .live
+    font-size: 20px

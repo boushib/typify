@@ -1,0 +1,74 @@
+.header
+  padding: 28px 0 0
+
+.nav
+  display: flex
+  align-items: center
+  justify-content: space-between
+  gap: 16px
+
+.logo
+  display: flex
+  align-items: center
+  gap: 10px
+
+  &:hover .logoMark
+    transform: rotate(-8deg) scale(1.05)
+
+.logoMark
+  display: grid
+  place-items: center
+  width: 40px
+  height: 40px
+  border-radius: 12px
+  color: var(--bg)
+  background-color: var(--main)
+  transition: transform .3s var(--ease-spring), background-color .3s
+
+.logoText
+  display: flex
+  flex-direction: column
+  color: var(--text)
+  font-size: 26px
+  font-weight: 700
+  line-height: 1
+
+.logoSmall
+  color: var(--sub)
+  font-size: 10px
+  font-weight: 400
+  letter-spacing: .1em
+
+.menu
+  display: flex
+  gap: 4px
+
+.item
+  display: flex
+  align-items: center
+  gap: 8px
+  padding: 8px 12px
+  border-radius: var(--radius-sm)
+  color: var(--sub)
+  font-size: 14px
+  transition: color .15s, background-color .15s
+
+  svg
+    transition: transform .25s var(--ease-spring)
+
+  &:hover
+    color: var(--text)
+
+    svg
+      transform: translateY(-2px)
+
+.active, .active:hover
+  color: var(--main)
+  background-color: var(--sub-alt)
+
+@media (max-width: 640px)
+  .label, .logoSmall
+    display: none
+
+  .logoText
+    font-size: 22px

@@ -1,3 +1,3 @@
-import Home from "@/views/Home"
+import TestView from "@/views/Test"
 
-export default Home
+export default TestView
