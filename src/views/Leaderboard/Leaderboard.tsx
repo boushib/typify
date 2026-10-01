@@ -1,6 +1,8 @@
+"use client"
+
 import { useEffect, useState } from "react"
 import LeaderboardItem from "../../components/Navbar/LeaderboardItem"
-import { ScoreRecord } from "../../models"
+import type { ScoreRecord } from "../../models"
 import "./Leaderboard.sass"
 
 const Leaderboard = () => {
@@ -9,7 +11,7 @@ const Leaderboard = () => {
   useEffect(() => {
     const handleFetchScores = async () => {
       try {
-        const res = await fetch(`/.netlify/functions/getScores`)
+        const res = await fetch("/api/scores")
         const data = (await res.json()) as Array<ScoreRecord>
         setScoreRecords(data)
       } catch (err) {

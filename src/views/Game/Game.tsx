@@ -1,14 +1,20 @@
+"use client"
+
 import { useCallback, useEffect, useRef, useState } from "react"
 import { GAME_DURATION } from "../../constants"
 import { formatToNDigits, getRandomChar } from "../../utils"
+import { useIsClient } from "../../hooks/useIsClient"
 import "./Game.sass"
 
-const Game = () => {
+// The letters are random, so the game renders in the browser only
+const Game = () => (useIsClient() ? <GameBoard /> : <div className="game page" />)
+
+const GameBoard = () => {
   const [score, setScore] = useState(0)
   const [char, setChar] = useState(getRandomChar())
   const [milliseconds, setMilliseconds] = useState(0)
   const [seconds, setSeconds] = useState(GAME_DURATION)
-  const timer = useRef<ReturnType<typeof setInterval>>()
+  const timer = useRef<ReturnType<typeof setInterval>>(undefined)
   const [isGameOver, setIsGameOver] = useState(false)
 
   const handleKeyDown = useCallback(
@@ -23,13 +29,27 @@ const Game = () => {
   )
 
   useEffect(() => {
+    const handleUpdateTime = (startTime: Date) => {
+      const timeDiff = new Date().getTime() - startTime.getTime()
+      const s = GAME_DURATION - Math.floor(timeDiff / 1000) - 1
+      const ms = 1000 - (timeDiff % 1000)
+      setSeconds(s)
+      setMilliseconds(ms)
+
+      if (s <= 0) {
+        setSeconds(0)
+        setMilliseconds(0)
+        setIsGameOver(true)
+        clearInterval(timer.current)
+      }
+    }
+
     const date = new Date()
     timer.current = setInterval(() => handleUpdateTime(date), 1)
 
     return () => {
       clearInterval(timer.current)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
@@ -40,20 +60,6 @@ const Game = () => {
     }
   }, [handleKeyDown])
 
-  const handleUpdateTime = (startTime: Date) => {
-    const timeDiff = new Date().getTime() - startTime.getTime()
-    const s = GAME_DURATION - Math.floor(timeDiff / 1000) - 1
-    const ms = 1000 - (timeDiff % 1000)
-    setSeconds(s)
-    setMilliseconds(ms)
-
-    if (s <= 0) {
-      setSeconds(0)
-      setMilliseconds(0)
-      setIsGameOver(true)
-      clearInterval(timer.current)
-    }
-  }
 
   return (
     <div className="game page">

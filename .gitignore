@@ -1,4 +1,9 @@
 node_modules
 build
 .DS_Store
-.env
+.env*
+/.next/
+/.next-*/
+/out/
+next-env.d.ts
+*.tsbuildinfo
