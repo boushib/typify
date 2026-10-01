@@ -3,7 +3,7 @@
 import classNames from "classnames"
 import { MousePointerClick, RotateCcw } from "lucide-react"
 import { useCallback, useEffect, useRef, useState } from "react"
-import { correctChars, wpm, type TestConfig } from "@/lib/engine"
+import { correctChars, invalidReason, wpm, type TestConfig } from "@/lib/engine"
 import { playClick } from "@/lib/sound"
 import { useStore } from "@/store"
 import ConfigBar from "./ConfigBar"
@@ -71,7 +71,7 @@ const TypingTest = () => {
     if (state.status !== "finished" || savedRun.current === state.run) return
     savedRun.current = state.run
     const r = toResult(state)
-    addResult(r)
+    if (!invalidReason(r)) addResult(r)
     // A microtask keeps the state update out of the effect body
     queueMicrotask(() => setResult(r))
   }, [state, addResult])

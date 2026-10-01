@@ -1,0 +1,277 @@
+.page
+  display: flex
+  flex-direction: column
+  gap: 24px
+  animation: fadeUp .35s var(--ease-out)
+
+@keyframes fadeUp
+  from
+    opacity: 0
+    transform: translateY(8px)
+
+.header
+  display: flex
+  flex-wrap: wrap
+  align-items: center
+  justify-content: space-between
+  gap: 12px
+
+  h1
+    font-size: 32px
+
+.confirm
+  display: flex
+  align-items: center
+  gap: 8px
+  font-size: 13px
+
+.ghost, .danger
+  display: inline-flex
+  align-items: center
+  gap: 6px
+  padding: 8px 12px
+  border-radius: var(--radius-sm)
+  font-size: 13px
+
+.ghost
+  color: var(--sub)
+
+  &:hover
+    color: var(--text)
+    background-color: var(--sub-alt)
+
+.danger
+  color: var(--bg)
+  background-color: var(--error)
+
+.cards
+  display: grid
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr))
+  gap: 12px
+
+.card
+  display: flex
+  flex-direction: column
+  gap: 4px
+  padding: 16px
+  border-radius: var(--radius)
+  background-color: var(--sub-alt)
+  animation: fadeUp .4s var(--ease-out) backwards
+
+  @for $i from 1 through 5
+    &:nth-child(#{$i})
+      animation-delay: #{$i * 50}ms
+
+  span
+    color: var(--sub)
+    font-size: 12px
+
+  strong
+    color: var(--main)
+    font-size: 30px
+
+.panel
+  display: flex
+  flex-direction: column
+  gap: 14px
+  padding: 18px
+  border-radius: var(--radius)
+  background-color: var(--sub-alt)
+
+  h2
+    color: var(--sub)
+    font-size: 15px
+
+.muted
+  color: var(--sub)
+  font-size: 14px
+
+// Chart
+
+.chart
+  position: relative
+
+  svg
+    display: block
+    width: 100%
+    height: auto
+    overflow: visible
+
+.gridLine
+  stroke: var(--bg)
+
+.axis
+  fill: var(--sub)
+  font-size: 11px
+
+.avgLine
+  fill: none
+  stroke: var(--sub)
+  stroke-width: 2
+  stroke-dasharray: 1
+  animation: draw 1.2s var(--ease-out) .3s backwards
+
+@keyframes draw
+  from
+    stroke-dashoffset: 1
+
+.dot
+  fill: var(--main)
+  stroke: var(--sub-alt)
+  stroke-width: 2
+  transform-box: fill-box
+  transform-origin: center
+  cursor: pointer
+  transition: r .1s
+  animation: dotIn .35s var(--ease-spring) backwards
+
+@keyframes dotIn
+  from
+    transform: scale(0)
+
+.tooltip
+  position: absolute
+  display: flex
+  flex-direction: column
+  padding: 8px 10px
+  border-radius: var(--radius-sm)
+  font-size: 12px
+  white-space: nowrap
+  background-color: var(--bg)
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .35)
+  transform: translate(-50%, calc(-100% - 12px))
+  pointer-events: none
+
+  strong
+    color: var(--main)
+
+  span
+    color: var(--sub)
+
+.legend
+  display: flex
+  justify-content: flex-end
+  gap: 14px
+  margin-top: 6px
+  color: var(--sub)
+  font-size: 12px
+
+  span
+    display: flex
+    align-items: center
+    gap: 6px
+
+.legendDot::before
+  content: ""
+  width: 8px
+  height: 8px
+  border-radius: 50%
+  background-color: var(--main)
+
+.legendAvg::before
+  content: ""
+  width: 14px
+  height: 2px
+  background-color: var(--sub)
+
+// Personal bests
+
+.pbGroups
+  display: flex
+  flex-direction: column
+  gap: 10px
+
+.pbGroup
+  display: grid
+  grid-template-columns: repeat(4, minmax(0, 1fr))
+  gap: 10px
+
+.pb
+  display: flex
+  flex-direction: column
+  align-items: center
+  gap: 2px
+  padding: 14px 8px
+  border-radius: var(--radius-sm)
+  background-color: var(--bg)
+
+  strong
+    color: var(--main)
+    font-size: 30px
+
+.pbMode, .pbAcc
+  color: var(--sub)
+  font-size: 12px
+
+// Recent tests
+
+.tableWrap
+  overflow-x: auto
+
+.table
+  width: 100%
+  border-collapse: collapse
+  font-size: 13px
+  white-space: nowrap
+
+  th
+    padding: 6px 10px
+    color: var(--sub)
+    font-weight: 400
+    text-align: left
+
+  td
+    padding: 10px
+
+  tbody tr:nth-child(odd)
+    background-color: var(--bg)
+
+  tbody tr td:first-child
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm)
+
+  tbody tr td:last-child
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0
+
+.wpm
+  color: var(--main)
+  font-weight: 700
+
+.date
+  color: var(--sub)
+
+.more
+  align-self: center
+  padding: 8px 14px
+  border-radius: var(--radius-sm)
+  color: var(--sub)
+
+  &:hover
+    color: var(--text)
+    background-color: var(--bg)
+
+// Empty
+
+.empty
+  display: flex
+  flex-direction: column
+  align-items: center
+  gap: 12px
+  margin: auto
+  padding: 48px 24px
+  color: var(--sub)
+  text-align: center
+
+  h1
+    color: var(--text)
+    font-size: 24px
+
+.cta
+  margin-top: 8px
+  padding: 10px 18px
+  border-radius: var(--radius)
+  color: var(--bg)
+  background-color: var(--main)
+
+@media (max-width: 640px)
+  .pbGroup
+    grid-template-columns: repeat(2, minmax(0, 1fr))

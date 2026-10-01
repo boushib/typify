@@ -137,3 +137,7 @@ export interface Result {
   quote?: Quote
   createdAt: number
 }
+
+/** Results too short or too fast to be real typing aren't saved or ranked */
+export const invalidReason = (r: Pick<Result, "duration" | "wpm">) =>
+  r.duration < 1 ? "Test too short" : r.wpm > 350 ? "Speed too high to be real typing" : null

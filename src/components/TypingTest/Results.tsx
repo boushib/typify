@@ -2,7 +2,7 @@
 
 import { ChevronRight, Repeat, Trophy } from "lucide-react"
 import { useEffect, useState } from "react"
-import type { Result } from "@/lib/engine"
+import { invalidReason, type Result } from "@/lib/engine"
 import { personalBest, useStore } from "@/store"
 import ResultChart from "./ResultChart"
 import SubmitScore from "./SubmitScore"
@@ -42,7 +42,8 @@ const Results = ({ result, onNext, onRepeat }: Props) => {
     history.filter(r => r.id !== result.id),
     result.label
   )
-  const isBest = result.wpm > 0 && (!previous || result.wpm > previous.wpm)
+  const invalid = invalidReason(result)
+  const isBest = !invalid && result.wpm > 0 && (!previous || result.wpm > previous.wpm)
   const { correct, incorrect, extra, missed } = result.chars
 
   return (
@@ -61,7 +62,9 @@ const Results = ({ result, onNext, onRepeat }: Props) => {
               <CountUp value={result.accuracy} />%
             </span>
           </div>
-          {isBest ? (
+          {invalid ? (
+            <div className={styles.invalid}>{invalid} · not saved</div>
+          ) : isBest ? (
             <div className={styles.pb}>
               <Trophy size={16} /> New personal best!
             </div>
@@ -104,7 +107,7 @@ const Results = ({ result, onNext, onRepeat }: Props) => {
         </blockquote>
       )}
 
-      <SubmitScore result={result} />
+      {!invalid && <SubmitScore result={result} />}
 
       <div className={styles.resultActions}>
         <button type="button" className={styles.action} onClick={onNext} autoFocus>

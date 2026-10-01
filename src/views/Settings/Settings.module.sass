@@ -1,0 +1,221 @@
+.page
+  display: flex
+  flex-direction: column
+  gap: 28px
+  animation: fadeUp .35s var(--ease-out)
+
+@keyframes fadeUp
+  from
+    opacity: 0
+    transform: translateY(8px)
+
+.header
+  display: flex
+  align-items: center
+  justify-content: space-between
+  gap: 16px
+
+  h1
+    font-size: 32px
+
+.reset
+  display: inline-flex
+  align-items: center
+  gap: 6px
+  padding: 8px 12px
+  border-radius: var(--radius-sm)
+  color: var(--sub)
+  font-size: 13px
+
+  &:hover
+    color: var(--text)
+    background-color: var(--sub-alt)
+
+.themes
+  display: flex
+  flex-direction: column
+  gap: 14px
+
+  h2
+    color: var(--sub)
+    font-size: 16px
+
+.themeGrid
+  display: grid
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr))
+  gap: 12px
+
+.theme
+  display: flex
+  flex-direction: column
+  gap: 10px
+  padding: 14px
+  border: 2px solid transparent
+  border-radius: var(--radius)
+  text-align: left
+  box-shadow: 0 0 0 1px rgba(127, 127, 127, .2)
+  transition: transform .2s var(--ease-spring), box-shadow .2s
+  animation: fadeUp .4s var(--ease-out) backwards
+
+  &:hover
+    transform: translateY(-3px)
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .25), 0 0 0 1px rgba(127, 127, 127, .25)
+
+.themeActive
+  transform: translateY(-2px)
+
+.themeName
+  display: flex
+  align-items: center
+  justify-content: space-between
+  font-weight: 700
+
+// Inline (not flex) so the spaces between words survive
+.themeSample
+  display: block
+  font-size: 14px
+  white-space: pre
+
+.themeCaret
+  display: inline-block
+  vertical-align: middle
+  width: 2px
+  height: 1.1em
+  margin: 0 1px
+  border-radius: 1px
+  animation: blink 1s step-end infinite
+
+@keyframes blink
+  50%
+    opacity: 0
+
+.swatches
+  display: flex
+  gap: 6px
+
+  span
+    width: 14px
+    height: 14px
+    border-radius: 50%
+
+.section
+  display: grid
+  grid-template-columns: minmax(0, 1fr) auto
+  align-items: center
+  gap: 16px 32px
+  padding: 18px 0
+  border-top: 1px solid var(--sub-alt)
+
+.sectionText
+  h2
+    font-size: 16px
+
+  p
+    margin-top: 2px
+    color: var(--sub)
+    font-size: 13px
+
+.sectionControl
+  display: flex
+  justify-content: flex-end
+
+.segmented
+  display: flex
+  flex-wrap: wrap
+  gap: 4px
+  padding: 4px
+  border-radius: var(--radius)
+  background-color: var(--sub-alt)
+
+.segment
+  display: inline-flex
+  align-items: center
+  gap: 8px
+  padding: 6px 12px
+  border-radius: var(--radius-sm)
+  color: var(--sub)
+  font-size: 13px
+  transition: color .15s, background-color .2s
+
+  &:hover
+    color: var(--text)
+
+.segmentActive, .segmentActive:hover
+  color: var(--bg)
+  background-color: var(--main)
+
+.caretPreview
+  position: relative
+  display: inline-block
+  width: 12px
+  text-align: center
+
+  &::after
+    content: ""
+    position: absolute
+
+.caret_line::after
+  top: 2px
+  bottom: 2px
+  left: -1px
+  width: 2px
+  background-color: currentColor
+
+.caret_block::after
+  inset: 1px 0
+  border-radius: 2px
+  background-color: currentColor
+  opacity: .35
+
+.caret_underline::after
+  right: 0
+  bottom: 0
+  left: 0
+  height: 2px
+  background-color: currentColor
+
+.switch
+  position: relative
+  width: 48px
+  height: 28px
+  border-radius: 14px
+  background-color: var(--sub-alt)
+  transition: background-color .2s
+
+  span
+    position: absolute
+    top: 4px
+    left: 4px
+    width: 20px
+    height: 20px
+    border-radius: 50%
+    background-color: var(--sub)
+    transition: transform .25s var(--ease-spring), background-color .2s
+
+.switchOn
+  background-color: var(--main)
+
+  span
+    background-color: var(--bg)
+    transform: translateX(20px)
+
+.input
+  width: 240px
+  padding: 8px 12px
+  border: 2px solid transparent
+  border-radius: var(--radius-sm)
+  outline: 0
+  background-color: var(--sub-alt)
+
+  &:focus
+    border-color: var(--main)
+
+@media (max-width: 640px)
+  .section
+    grid-template-columns: 1fr
+
+  .sectionControl
+    justify-content: flex-start
+
+  .input
+    width: 100%
