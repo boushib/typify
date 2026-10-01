@@ -25,10 +25,6 @@
 | Results | Leaderboard |
 | --- | --- |
 | <img src="docs/screenshots/results.png" alt="Results with a WPM chart" /> | <img src="docs/screenshots/leaderboard.png" alt="Leaderboard podium with trophies" /> |
-| **Stats** | **Letter Rush** |
-| <img src="docs/screenshots/stats.png" alt="Stats with a progress chart" /> | <img src="docs/screenshots/arcade.png" alt="Letter Rush arcade mode" /> |
-| **Settings** | **On a phone** |
-| <img src="docs/screenshots/settings.png" alt="Settings with theme previews" /> | <p align="center"><img src="docs/screenshots/mobile.png" alt="Leaderboard on a phone" width="260" /></p> |
 
 ## About
 
