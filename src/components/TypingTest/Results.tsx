@@ -117,7 +117,7 @@ const Results = ({ result, onNext, onRepeat }: Props) => {
           <Repeat size={16} /> Repeat
         </button>
       </div>
-      <p className={styles.hints}>
+      <p className={`${styles.hints} keyboard-only`}>
         <kbd>tab</kbd> or <kbd>enter</kbd> next test
       </p>
     </div>

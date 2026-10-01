@@ -472,6 +472,14 @@
 .legendErrors::before
   background-color: var(--error)
 
+@media (max-width: 640px)
+  // Groups wrap onto their own lines here, so the dividers would dangle
+  .divider
+    display: none
+
+  .configBar
+    gap: 2px
+
 @media (max-width: 760px)
   .resultsTop
     grid-template-columns: 1fr

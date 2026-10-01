@@ -186,7 +186,7 @@ const Arcade = () => {
           <button type="button" className={styles.play} onClick={start}>
             <Play size={18} /> Start
           </button>
-          <span className={styles.hint}>
+          <span className={`${styles.hint} keyboard-only`}>
             or press <kbd>space</kbd>
           </span>
         </section>

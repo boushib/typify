@@ -66,6 +66,15 @@ ul, ol
   margin: 0 auto
   padding: 0 24px
 
+@media (max-width: 640px)
+  .container
+    padding: 0 16px
+
+// Keyboard shortcut hints mean nothing on touch screens
+@media (hover: none) and (pointer: coarse)
+  .keyboard-only
+    display: none !important
+
 .sr-only
   position: absolute
   width: 1px

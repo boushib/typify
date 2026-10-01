@@ -183,7 +183,7 @@ const TypingTest = () => {
         </button>
       </div>
 
-      <p className={styles.hints}>
+      <p className={`${styles.hints} keyboard-only`}>
         <kbd>tab</kbd> restart · <kbd>ctrl</kbd>+<kbd>backspace</kbd> delete word
       </p>
     </div>
