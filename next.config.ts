@@ -2,10 +2,12 @@ import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  // A second dev server (e.g. an agent's) can build into its own folder
-  distDir: process.env.NEXT_DIST_DIR || ".next",
-  // The original letter game lived at /games/:id; it's now the arcade
-  redirects: () => [{ source: "/games/:id", destination: "/arcade", permanent: true }],
+  // A static site: `next build` writes plain HTML, CSS and JS to out/, ready for any static host
+  output: "export",
+  // /leaderboard/ is served from leaderboard/index.html, which every static host understands
+  trailingSlash: true,
+  // A second dev server (e.g. an agent's) can build into its own folder; in export mode this is also where the site lands
+  ...(process.env.NEXT_DIST_DIR && { distDir: process.env.NEXT_DIST_DIR }),
 }
 
 export default nextConfig
