@@ -34,7 +34,7 @@
 
 Typify measures your typing speed and accuracy. It's built with **Next.js 16** (App Router), **React 19** and **TypeScript**.
 
-Settings, results and personal bests are saved in your browser. The leaderboard is served by a mock API (a Next.js route handler with in-memory demo data), so it works with no external services.
+Everything is saved in your browser: settings, results, personal bests and the leaderboard (a field of demo players plus the scores you submit). There's no server, so it's a static site that runs on any host.
 
 ## Features
 
@@ -85,42 +85,23 @@ Open [http://localhost:3000](http://localhost:3000).
 | Script | What it does |
 | --- | --- |
 | `pnpm dev` | Dev server with Turbopack |
-| `pnpm build` / `pnpm start` | Production build and server |
+| `pnpm build` | Static build of the whole site in `out/` |
 | `pnpm lint` | ESLint (flat config) |
 | `pnpm typecheck` | TypeScript, no emit |
 | `pnpm dev:agent` / `pnpm build:agent` | The same on port 3400, with a separate `.next-agent` output, so a second server doesn't clash with yours |
 
-## API
+## Leaderboard
 
-The leaderboard API is a mock: scores live in memory, seeded with demo players, and reset when the server restarts. To make it real, swap `src/lib/server/scores.ts` for a database.
-
-### `GET /api/scores?mode=time%2015&limit=50`
-
-Each player's best score for a mode, ranked. `mode` is one of `time 15`, `time 30`, `time 60` or `words 25`.
-
-```json
-[{ "id": "…", "username": "keymaster", "wpm": 148, "accuracy": 98.77, "mode": "time 15", "createdAt": "…", "rank": 1 }]
-```
-
-### `POST /api/scores`
-
-```json
-{ "username": "you", "wpm": 112.4, "accuracy": 97.5, "mode": "time 15" }
-```
-
-Returns the saved score with your rank, for example `{ "score": {…}, "rank": 7, "total": 17, "personalBest": true }`.
-
-Names must be 2–20 letters, digits, dots, dashes or underscores. Scores above 300 WPM are rejected.
+The leaderboard lives in your browser: seeded demo players plus the scores you submit, saved in localStorage. Each player's best result per test type is ranked. Names must be 2–20 letters, digits, dots, dashes or underscores, and scores above 300 WPM are rejected. To share it between players, swap `src/lib/scores.ts` for calls to a real backend.
 
 ## Project structure
 
 ```
 src/
-  app/                 Routes: / (test), /arcade, /leaderboard, /stats, /settings, /api/scores
+  app/                 Routes: / (test), /arcade, /leaderboard, /stats, /settings
   components/          Typing test, navbar, trophy, app shell
   views/               One folder per page
-  lib/                 Test engine and stats, words, quotes, themes, sound
-  lib/server/          Mock score store (server only)
+  lib/                 Test engine and stats, words, quotes, themes, sound, and the leaderboard (scores.ts)
   store/               Settings, results history and best scores (zustand, saved to localStorage)
 ```
 
