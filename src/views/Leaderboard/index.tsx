@@ -1,9 +1,11 @@
 "use client"
 
 import classNames from "classnames"
-import { Crown, RefreshCw, Sparkle } from "lucide-react"
-import { useEffect, useState } from "react"
+import { Crown, Sparkle } from "lucide-react"
+import { useState } from "react"
 import Trophy, { type Medal } from "@/components/Trophy"
+import { useIsClient } from "@/hooks/useIsClient"
+import { topScores } from "@/lib/scores"
 import { LEADERBOARD_MODES, type LeaderboardMode, type RankedScore } from "@/models"
 import { useStore } from "@/store"
 import styles from "./Leaderboard.module.sass"
@@ -61,27 +63,12 @@ const PodiumSpot = ({ score, place, you }: { score: RankedScore; place: 1 | 2 | 
   </div>
 )
 
-type Load = { mode: LeaderboardMode; scores: RankedScore[] | null; error: string | null }
-
 const Leaderboard = () => {
   const username = useStore(s => s.settings.username).toLowerCase()
   const [mode, setMode] = useState<LeaderboardMode>("time 15")
-  const [attempt, setAttempt] = useState(0)
-  const [load, setLoad] = useState<Load | null>(null)
-
-  useEffect(() => {
-    let cancelled = false
-    fetch(`/api/scores?mode=${encodeURIComponent(mode)}&limit=50`)
-      .then(res => (res.ok ? res.json() : Promise.reject(new Error(`HTTP ${res.status}`))))
-      .then((scores: RankedScore[]) => !cancelled && setLoad({ mode, scores, error: null }))
-      .catch(() => !cancelled && setLoad({ mode, scores: null, error: "Couldn’t load the leaderboard." }))
-    return () => {
-      cancelled = true
-    }
-  }, [mode, attempt])
-
-  const ready = load?.mode === mode ? load : null
-  const scores = ready?.scores ?? []
+  // The board lives in localStorage, so it's only read in the browser
+  const ready = useIsClient()
+  const scores = ready ? topScores(mode, 50) : []
   const [first, second, third] = scores
   const rest = scores.slice(3)
 
@@ -116,16 +103,7 @@ const Leaderboard = () => {
         </div>
       )}
 
-      {ready?.error && (
-        <div className={styles.state}>
-          <p>{ready.error}</p>
-          <button type="button" className={styles.retry} onClick={() => setAttempt(a => a + 1)}>
-            <RefreshCw size={14} /> Try again
-          </button>
-        </div>
-      )}
-
-      {ready && !ready.error && scores.length === 0 && <div className={styles.state}>No scores yet. Be the first!</div>}
+      {ready && scores.length === 0 && <div className={styles.state}>No scores yet. Be the first!</div>}
 
       {first && (
         <section className={styles.podium} key={mode} aria-label="Top three">

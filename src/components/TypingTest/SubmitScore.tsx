@@ -4,13 +4,14 @@ import { Check, Crown, Send } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 import type { Result } from "@/lib/engine"
+import { submitScore } from "@/lib/scores"
 import { LEADERBOARD_MODES, type LeaderboardMode } from "@/models"
 import { useStore } from "@/store"
 import styles from "./TypingTest.module.sass"
 
 type Submitted = { rank: number; total: number; personalBest: boolean }
 
-/** Sends a result to the leaderboard API; only for test types that have a board */
+/** Adds a result to the leaderboard; only for test types that have a board */
 const SubmitScore = ({ result }: { result: Result }) => {
   const saved = useStore(s => s.settings.username)
   const setSettings = useStore(s => s.setSettings)
@@ -22,23 +23,16 @@ const SubmitScore = ({ result }: { result: Result }) => {
   const mode = result.label as LeaderboardMode
   if (!LEADERBOARD_MODES.includes(mode)) return null
 
-  const submit = async () => {
-    setStatus("sending")
-    try {
-      const res = await fetch("/api/scores", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ username: name.trim(), wpm: result.wpm, accuracy: result.accuracy, mode }),
-      })
-      const data = await res.json()
-      if (!res.ok) throw new Error(data.error ?? "Couldn’t submit your score")
-      setSettings({ username: name.trim() })
-      setSubmitted(data)
-      setStatus("idle")
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "Couldn’t submit your score")
+  const submit = () => {
+    const res = submitScore({ username: name, wpm: result.wpm, accuracy: result.accuracy, mode })
+    if ("error" in res) {
+      setError(res.error)
       setStatus("error")
+      return
     }
+    setSettings({ username: name.trim() })
+    setSubmitted(res)
+    setStatus("idle")
   }
 
   if (submitted) {
