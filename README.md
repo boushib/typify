@@ -4,6 +4,8 @@
 
 **A fast, minimal typing speed test, with a leaderboard, stats, themes and an arcade mode.**
 
+**[▶ Try it live](https://typify-1rjv.onrender.com)**
+
 [![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white)](https://nextjs.org)
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
